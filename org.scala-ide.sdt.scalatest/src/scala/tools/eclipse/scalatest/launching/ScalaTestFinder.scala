@@ -267,7 +267,7 @@ class ScalaTestFinder(compiler: ScalaPresentationCompiler, loader: ClassLoader) 
   private def mapApplyToMethodInvocation(className: String, apply: Apply, rootTree: Tree): MethodInvocation = {
     val target = getTarget(className, apply, rootTree)
     val name = apply.symbol.decodedName
-    val rawArgs = if (apply.fun.hasSymbol) apply.args else apply.fun.asInstanceOf[GenericApply].args
+    val rawArgs = if (apply.fun.hasSymbolField) apply.args else apply.fun.asInstanceOf[GenericApply].args
     val args = rawArgs.map{
       case lit: Literal =>
         new StringLiteral(className, rootTree, apply, lit.value.stringValue)
